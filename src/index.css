@@ -1,94 +1,130 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #090e1a;
+  --color-bg-elevated: #0f1626;
+  --color-surface: #141d33;
+  --color-surface-hover: #1a2540;
+  --color-surface-active: #202d4d;
+  --color-border: #22304f;
+  --color-border-strong: #2f4066;
+
+  --color-primary: #4c7dfb;
+  --color-primary-hover: #3d66f0;
+  --color-primary-active: #345bd8;
+  --color-primary-soft: rgba(76, 125, 251, 0.14);
+  --color-primary-text: #ffffff;
+
+  --color-text: #eef1fa;
+  --color-text-muted: #8d9ac0;
+  --color-text-faint: #5d6a8f;
+
+  --color-danger: #f2596a;
+  --color-danger-soft: rgba(242, 89, 106, 0.14);
+  --color-warning: #f5a623;
+  --color-warning-soft: rgba(245, 166, 35, 0.14);
+  --color-success: #2ed3a3;
+  --color-success-soft: rgba(46, 211, 163, 0.14);
+
+  --radius-xs: 8px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 6px 20px -4px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 16px 40px -8px rgba(0, 0, 0, 0.55);
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", system-ui,
+    Roboto, Helvetica, Arial, sans-serif;
+}
+
 :root {
   color-scheme: dark;
 
-  --bg: #090e1a;
-  --bg-elevated: #0f1626;
-  --surface: #141d33;
-  --surface-hover: #1a2540;
-  --surface-active: #202d4d;
-  --border: #22304f;
-  --border-strong: #2f4066;
+  /* Legacy token aliases: kept so existing var(--x) references (inline styles,
+     component CSS not yet converted to @apply) keep resolving. Single source of
+     truth is the @theme block above. */
+  --bg: var(--color-bg);
+  --bg-elevated: var(--color-bg-elevated);
+  --surface: var(--color-surface);
+  --surface-hover: var(--color-surface-hover);
+  --surface-active: var(--color-surface-active);
+  --border: var(--color-border);
+  --border-strong: var(--color-border-strong);
 
-  --primary: #4c7dfb;
-  --primary-hover: #3d66f0;
-  --primary-active: #345bd8;
-  --primary-soft: rgba(76, 125, 251, 0.14);
-  --primary-text: #ffffff;
+  --primary: var(--color-primary);
+  --primary-hover: var(--color-primary-hover);
+  --primary-active: var(--color-primary-active);
+  --primary-soft: var(--color-primary-soft);
+  --primary-text: var(--color-primary-text);
 
-  --text: #eef1fa;
-  --text-muted: #8d9ac0;
-  --text-faint: #5d6a8f;
+  --text: var(--color-text);
+  --text-muted: var(--color-text-muted);
+  --text-faint: var(--color-text-faint);
 
-  --danger: #f2596a;
-  --danger-soft: rgba(242, 89, 106, 0.14);
-  --warning: #f5a623;
-  --warning-soft: rgba(245, 166, 35, 0.14);
-  --success: #2ed3a3;
-  --success-soft: rgba(46, 211, 163, 0.14);
+  --danger: var(--color-danger);
+  --danger-soft: var(--color-danger-soft);
+  --warning: var(--color-warning);
+  --warning-soft: var(--color-warning-soft);
+  --success: var(--color-success);
+  --success-soft: var(--color-success-soft);
 
-  --radius-lg: 18px;
-  --radius: 14px;
-  --radius-sm: 10px;
-  --radius-xs: 8px;
+  /* --radius-lg, --radius-sm, --radius-xs, --shadow-sm, --shadow-lg already come
+     from @theme above with matching names — only the renamed ones need an alias. */
+  --radius: var(--radius-md);
+  --shadow: var(--shadow-md);
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
-  --shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 16px 40px -8px rgba(0, 0, 0, 0.55);
+  --ease: var(--ease-standard);
 
-  --ease: cubic-bezier(0.4, 0, 0.2, 1);
-
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", system-ui,
-    Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 * {
-  box-sizing: border-box;
+  @apply box-border;
 }
 
 html,
 body {
-  margin: 0;
-  padding: 0;
+  @apply m-0 p-0;
 }
 
 body {
-  background: var(--bg);
+  @apply bg-[var(--bg)] text-[var(--text)] min-h-screen;
   background-image: radial-gradient(
     circle at 10% -10%,
     rgba(76, 125, 251, 0.08),
     transparent 40%
   );
   background-attachment: fixed;
-  color: var(--text);
-  min-height: 100vh;
   -webkit-tap-highlight-color: transparent;
 }
 
 #root {
-  min-height: 100vh;
+  @apply min-h-screen;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  @apply text-inherit no-underline;
 }
 
 button {
-  font-family: inherit;
+  @apply font-[inherit];
   -webkit-tap-highlight-color: transparent;
 }
 
 input,
 select,
 textarea {
-  font-family: inherit;
-  font-size: 16px;
+  @apply font-[inherit] text-base;
 }
 
 svg {
-  display: block;
+  @apply block;
 }
 
 ::-webkit-scrollbar {

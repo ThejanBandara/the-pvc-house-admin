@@ -4,10 +4,10 @@ import ComingSoon from "../components/ComingSoon";
 export default function SalesPage() {
   return (
     <div>
-      <div className="page-header">
+      <div className="flex items-center justify-between gap-3 mb-[18px] flex-wrap">
         <div>
-          <h1>Sales</h1>
-          <div className="page-subtitle">Revenue and transaction reporting</div>
+          <h1 className="m-0 text-[22px] font-extrabold tracking-[-0.3px]">Sales</h1>
+          <div className="text-[var(--text-muted)] text-[13px] mt-[2px]">Revenue and transaction reporting</div>
         </div>
       </div>
       <ComingSoon
